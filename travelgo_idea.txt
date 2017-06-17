@@ -4,3 +4,6 @@
 
 Amadeus API
 API key: 2Xki9s14ZR3GxGPnxtYT23IUkDWNyNQP
+
+
+ARN - arn:aws:lambda:us-east-1:345756334322:function:travelgoAlexaSkill
