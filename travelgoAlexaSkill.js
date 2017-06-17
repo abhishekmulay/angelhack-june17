@@ -91,3 +91,20 @@ function getSampleRequest() {
     var params = "&origin=BOS&one-way=true&max_price=800";
     return FLIGHT_ENDPOINT + API_KEY + params;
 }
+
+function getInspirationRequest(origin,price){
+    var FLIGHT_ENDPOINT = "https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search";
+    var API_KEY = "?apikey=" + "2Xki9s14ZR3GxGPnxtYT23IUkDWNyNQP";
+    var params = "&origin="+ origin +"&one-way=true&max_price="+ price;
+    return FLIGHT_ENDPOINT + API_KEY + params;
+
+}
+
+function getLowFareSearch(origin,destination,departureDate,numOfResults){
+    var FLIGHT_ENDPOINT = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search";
+    var API_KEY = "?apikey=" + "2Xki9s14ZR3GxGPnxtYT23IUkDWNyNQP";
+    var params = "&origin="+origin+"&destination="+destination+"&departure_date="+departureDate+"&number_of_results=" + numOfResults;
+    return FLIGHT_ENDPOINT + API_KEY + params;
+
+}
+
