@@ -1,0 +1,6 @@
+==============================
+        TRAVEL GO
+================================
+
+Amadeus API
+API key: 2Xki9s14ZR3GxGPnxtYT23IUkDWNyNQP
