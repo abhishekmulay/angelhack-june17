@@ -108,3 +108,21 @@ function getLowFareSearch(origin,destination,departureDate,numOfResults){
 
 }
 
+function postSMS(body, toNumber){
+
+    var accountSid = 'ACd616e4df368fe04b619acdb9a3766d0f';
+    var authToken = '7783759da9c50a5e97bd4ca9798ef059';
+
+    //require the Twilio module and create a REST client
+    var client = require('twilio')(accountSid, authToken);
+
+    client.messages.create({
+        to: toNumber,
+        from: "+18572069138",
+        body: body,
+    }, function(err, message) {
+        console.log(message.sid);
+    });
+
+
+}
