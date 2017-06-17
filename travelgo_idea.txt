@@ -11,3 +11,13 @@ ARN - arn:aws:lambda:us-east-1:345756334322:function:travelgoAlexaSkill
 
 Requests:
 
+
+
+getFlightsLeavingFrom flights leaving from {fromAirport}
+getFlightsLeavingFrom flights departing from {fromAirport}
+getFlightsLeavingFrom flights starting from {fromAirport}
+getFlightsLeavingFrom flights from {fromAirport}
+
+getFlightsBetween flights from {fromAirport} to {toAirport}
+getFlightsBetween flights to {toAirport} from {fromAirport}
+getFlightsBetween flights between {fromAirport} to {toAirport}

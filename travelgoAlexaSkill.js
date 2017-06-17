@@ -42,7 +42,31 @@ exports.handler = (event, context) => {
                                     )
                                 )
                             })
-                        })
+                        });
+                        break;
+
+
+                    case "getFlightsBetween":
+                        var endpoint = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=2Xki9s14ZR3GxGPnxtYT23IUkDWNyNQP&origin=BOS&destination=LON&departure_date=2017-06-20&number_of_results=3";
+                        var from = event.request.intent.slots.fromAirport.value;
+                        var to = event.request.intent.slots.toAirport.value;
+                        var body = "";
+                        https.get(endpoint, (response) => {
+                            response.on('data', (chunk) => {
+                                body += chunk
+                            })
+                            response.on('end', () => {
+                                var data = JSON.parse(body)
+                                var numberOfFlights = data.results.itineraries.length;
+                                context.succeed(
+                                    generateResponse(
+                                        buildSpeechletResponse(`Number of Flights found ${numberOfFlights} for journey ${from} to ${to}`, true),
+                                        {}
+                                    )
+                                )
+                            })
+                        });
+                        break;
                 }
 
                 break;
@@ -92,23 +116,24 @@ function getSampleRequest() {
     return FLIGHT_ENDPOINT + API_KEY + params;
 }
 
-function getInspirationRequest(origin,price){
+function getInspirationRequest(origin, price) {
     var FLIGHT_ENDPOINT = "https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search";
     var API_KEY = "?apikey=" + "2Xki9s14ZR3GxGPnxtYT23IUkDWNyNQP";
-    var params = "&origin="+ origin +"&one-way=true&max_price="+ price;
+    var params = "&origin=" + origin + "&one-way=true&max_price=" + price;
     return FLIGHT_ENDPOINT + API_KEY + params;
 
 }
 
-function getLowFareSearch(origin,destination,departureDate,numOfResults){
+function getLowFareSearch(origin, destination) {
+    var departureDate = "2017-06-20";
+    var numOfResults = 3;
     var FLIGHT_ENDPOINT = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search";
     var API_KEY = "?apikey=" + "2Xki9s14ZR3GxGPnxtYT23IUkDWNyNQP";
-    var params = "&origin="+origin+"&destination="+destination+"&departure_date="+departureDate+"&number_of_results=" + numOfResults;
+    var params = "&origin=" + origin + "&destination=" + destination + "&departure_date=" + departureDate + "&number_of_results=" + numOfResults;
     return FLIGHT_ENDPOINT + API_KEY + params;
-
 }
 
-function postSMS(body, toNumber){
+function postSMS(body, toNumber) {
 
     var accountSid = 'ACd616e4df368fe04b619acdb9a3766d0f';
     var authToken = '7783759da9c50a5e97bd4ca9798ef059';
@@ -120,7 +145,7 @@ function postSMS(body, toNumber){
         to: toNumber,
         from: "+18572069138",
         body: body,
-    }, function(err, message) {
+    }, function (err, message) {
         console.log(message.sid);
     });
 
